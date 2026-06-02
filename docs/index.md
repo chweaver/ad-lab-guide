@@ -51,8 +51,8 @@ Both VMs live on the same subnet, so the domain join does not traverse any exter
 | 4 | OU structure | Done |
 | 5 | Users | Done |
 | 6 | Security groups + AGDLP | Done |
-| 7 | Join a client (WS01) | **Next** |
-| 8 | Group Policy basics + inheritance | Not started |
+| 7 | Join a client (WS01) | Done |
+| 8 | Group Policy basics + inheritance | **Next** |
 | 9 | File shares | Not started |
 | 10 | Home folders + folder redirection | Not started |
 | 11 | Login scripts + drive mapping | Not started |
@@ -63,4 +63,4 @@ Both VMs live on the same subnet, so the domain join does not traverse any exter
 | 16 | Second DC + replication | Stretch |
 
 !!! tip "Snapshots are not optional"
-    Take a snapshot after every phase that the page recommends. Restoring is the fastest debug tool you have when a GPO or DNS change breaks the lab. Existing snapshots: `clean-install-tools-done`, `clean-dc-promoted`.
+    Take a snapshot after every phase that the page recommends. Restoring is the fastest debug tool you have when a GPO or DNS change breaks the lab. Existing snapshots: `clean-install-tools-done`, `clean-dc-promoted`, `clean-domain-joined`.

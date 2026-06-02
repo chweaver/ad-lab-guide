@@ -1,6 +1,6 @@
 # Phase 7: Join a client (WS01)
 
-**Status:** Next.
+**Status:** Done.
 
 ## Goal
 
