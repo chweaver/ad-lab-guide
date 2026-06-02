@@ -1,0 +1,75 @@
+site_name: AD Lab Foundations
+site_description: A reproducible Active Directory home lab guide, built for CompTIA A+ Core 2 prep and portfolio.
+site_author: chweaver
+
+theme:
+  name: material
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.sections
+    - navigation.indexes
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - content.code.annotate
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+  icon:
+    repo: fontawesome/brands/github
+
+plugins:
+  - search
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - tables
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.highlight:
+      linenums: true
+      anchor_linenums: true
+      use_pygments: true
+  - toc:
+      permalink: true
+
+nav:
+  - Home: index.md
+  - Reference: reference.md
+  - Build-out:
+    - Phase 1 - Install Server 2022: build-out/phase-01-install.md
+    - Phase 2 - Pre-promotion config: build-out/phase-02-pre-promotion.md
+    - Phase 3 - Promote to DC: build-out/phase-03-promote.md
+    - Phase 4 - OU structure: build-out/phase-04-ou.md
+    - Phase 5 - Users: build-out/phase-05-users.md
+    - Phase 6 - Groups and AGDLP: build-out/phase-06-groups.md
+    - Phase 7 - Join client WS01: build-out/phase-07-join-client.md
+    - Phase 8 - Group Policy basics: build-out/phase-08-gpo.md
+    - Phase 9 - File shares: build-out/phase-09-shares.md
+    - Phase 10 - Home folders and redirection: build-out/phase-10-home-folders.md
+    - Phase 11 - Login scripts and drive mapping: build-out/phase-11-scripts.md
+    - Phase 12 - Help-desk admin drills: build-out/phase-12-helpdesk.md
+  - Stretch:
+    - Phase 13 - DHCP role: stretch/phase-13-dhcp.md
+    - Phase 14 - RDP and remote access: stretch/phase-14-rdp.md
+    - Phase 15 - AD backup and restore: stretch/phase-15-backup.md
+    - Phase 16 - Second DC and replication: stretch/phase-16-second-dc.md
+  - Exam notes: exam-notes.md
+  - Gotchas: gotchas.md
