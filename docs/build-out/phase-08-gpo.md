@@ -1,6 +1,6 @@
 # Phase 8: Group Policy basics and inheritance
 
-**Status:** Not started.
+**Status:** Done.
 
 ## Goal
 

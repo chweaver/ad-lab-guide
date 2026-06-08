@@ -52,8 +52,8 @@ Both VMs live on the same subnet, so the domain join does not traverse any exter
 | 5 | Users | Done |
 | 6 | Security groups + AGDLP | Done |
 | 7 | Join a client (WS01) | Done |
-| 8 | Group Policy basics + inheritance | **Next** |
-| 9 | File shares | Not started |
+| 8 | Group Policy basics + inheritance | Done |
+| 9 | File shares | **Next** |
 | 10 | Home folders + folder redirection | Not started |
 | 11 | Login scripts + drive mapping | Not started |
 | 12 | Help-desk admin drills | Not started |
