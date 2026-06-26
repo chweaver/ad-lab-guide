@@ -1,6 +1,6 @@
 # Phase 9: File shares
 
-**Status:** Not started.
+**Status:** Done.
 
 ## Goal
 

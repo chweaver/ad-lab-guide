@@ -1,6 +1,6 @@
 # Phase 10: Home folders and folder redirection
 
-**Status:** Not started.
+**Status:** Done.
 
 ## Goal
 

@@ -1,6 +1,6 @@
 # Phase 11: Login scripts and drive mapping
 
-**Status:** Not started.
+**Status:** In progress.
 
 ## Goal
 
