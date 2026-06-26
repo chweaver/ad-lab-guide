@@ -4,6 +4,8 @@ A reproducible Active Directory home lab on VMware Workstation. Two jobs: a pers
 
 This is a **guide**, not a build log. Every phase is reproducible from a blank VM by following the steps exactly.
 
+New here: the [Lab Map](lab-map.md) shows every phase on one screen, and [Next Lab Series](next-lab-series.md) shows where this path leads.
+
 ## What this lab is
 
 A single-domain forest hosted in VMware Workstation Pro. One Server 2022 domain controller (`DC01`), one Windows 10/11 client (`WS01`), both on a host-only network (`VMnet1`, `192.168.100.0/24`). No internet routing in the lab subnet. Everything internal is resolved by AD-integrated DNS on the DC.
@@ -60,7 +62,8 @@ Both VMs live on the same subnet, so the domain join does not traverse any exter
 | 13 | DHCP role | Stretch |
 | 14 | RDP / remote access | Stretch |
 | 15 | AD backup + restore | Stretch |
-| 16 | Second DC + replication | Stretch |
+| 16 | Second DC (Server 2025) + replication | Stretch |
+| 17 | Entra Connect hybrid identity | Stretch |
 
 !!! tip "Snapshots are not optional"
     Take a snapshot after every phase that the page recommends. Restoring is the fastest debug tool you have when a GPO or DNS change breaks the lab. Existing snapshots: `clean-install-tools-done`, `clean-dc-promoted`, `clean-domain-joined`.

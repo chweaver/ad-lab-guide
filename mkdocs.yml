@@ -40,7 +40,11 @@ markdown_extensions:
   - attr_list
   - tables
   - pymdownx.details
-  - pymdownx.superfences
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
   - pymdownx.tabbed:
       alternate_style: true
   - pymdownx.highlight:
@@ -52,6 +56,7 @@ markdown_extensions:
 
 nav:
   - Home: index.md
+  - Lab Map: lab-map.md
   - Reference: reference.md
   - Build-out:
     - Phase 1 - Install Server 2022: build-out/phase-01-install.md
@@ -70,6 +75,8 @@ nav:
     - Phase 13 - DHCP role: stretch/phase-13-dhcp.md
     - Phase 14 - RDP and remote access: stretch/phase-14-rdp.md
     - Phase 15 - AD backup and restore: stretch/phase-15-backup.md
-    - Phase 16 - Second DC and replication: stretch/phase-16-second-dc.md
+    - Phase 16 - Second DC on Server 2025: stretch/phase-16-second-dc.md
+    - Phase 17 - Entra Connect hybrid identity: stretch/phase-17-entra-connect.md
+  - Next Lab Series: next-lab-series.md
   - Exam notes: exam-notes.md
   - Gotchas: gotchas.md
