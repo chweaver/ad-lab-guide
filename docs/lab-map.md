@@ -12,27 +12,28 @@ flowchart TD
 
     subgraph BUILD["Build-out: A+ Core 2 core"]
         direction TB
-        P1["1 Install Server 2022"] --> P2["2 Pre-promotion config"]
-        P2 --> P3["3 Promote to DC (new forest)"]
-        P3 --> P4["4 OU structure"]
-        P4 --> P5["5 Users"]
-        P5 --> P6["6 Groups + AGDLP"]
-        P6 --> P7["7 Join client WS01"]
-        P7 --> P8["8 Group Policy"]
-        P8 --> P9["9 File shares"]
-        P9 --> P10["10 Home folders + redirection"]
-        P10 --> P11["11 Login scripts + drive maps (NEXT)"]
-        P11 --> P12["12 Help-desk drills"]
+        P1["1 Build the DC"] --> P2["2 OUs, users, AGDLP"]
+        P2 --> P3["3 Join client WS01"]
+        P3 --> P4["4 Group Policy"]
+        P4 --> P5["5 File services"]
+        P5 --> P6["6 Login scripts + drive maps (NEXT)"]
+        P6 --> P7["7 Help-desk drills"]
+    end
+
+    subgraph PLANNED["Planned: Security+ depth"]
+        direction TB
+        P8["8 GPO security baseline"]
+        P9["9 Departmental file server"]
+        P10["10 Scripted patching"]
+        P15["15 AD backup + restore"]
+        P16["16 DC02 on Server 2025 + replication"]
     end
 
     subgraph STRETCH["Stretch: MSP depth"]
         direction TB
         P13["13 DHCP role"]
         P14["14 RDP / remote access"]
-        P15["15 AD backup + restore"]
-        P16["16 DC02 on Server 2025 + replication"]
         P17["17 Entra Connect hybrid identity"]
-        P16 --> P17
     end
 
     subgraph AISEC["Next series: AI Security Lab"]
@@ -44,26 +45,31 @@ flowchart TD
         A5 --> A6["6 Detection + response"]
     end
 
-    P8 -.-> P13
-    P8 -.-> P14
-    P3 -.-> P15
-    P8 -.-> P16
-    P12 ==> A1
+    P4 -.-> P8
+    P5 -.-> P9
+    P5 -.-> P10
+    P7 -.-> P15
+    P4 -.-> P16
+    P4 -.-> P13
+    P4 -.-> P14
+    P16 --> P17
+    P7 ==> A1
     P17 ==> A4
 
-    class P1,P2,P3,P4,P5,P6,P7,P8,P9,P10 done
-    class P11 next
-    class P12 planned
-    class P13,P14,P15,P16,P17 stretch
+    class P1,P2,P3,P4,P5 done
+    class P6 next
+    class P7,P8,P9,P10,P15,P16 planned
+    class P13,P14,P17 stretch
     class A1,A2,A3,A4,A5,A6 ai
 ```
 
 ## Where you are
 
-Phases 1 through 10 are complete: a healthy `corp.lab` domain with OUs, users, AGDLP groups, a domain-joined client, Group Policy, file shares, and redirected home folders. **Phase 11 (login scripts and drive mapping) is the current step.** The live counter on the [Home](index.md) page is the source of truth.
+Phases 1 through 5 are complete: a healthy `corp.lab` domain with OUs, users, AGDLP groups, a domain-joined client, Group Policy, file shares, and redirected home folders. **Phase 6 (login scripts and drive maps) is the current step.** The live counter on the [Home](index.md) page is the source of truth.
 
 ## How the tracks relate
 
-- **Build-out (1-12)** is the A+ Core 2 core. Each phase assumes the prior one finished cleanly.
-- **Stretch (13-17)** is portfolio and MSP depth. DHCP, RDP, and backup branch off a working domain independently. The second DC (16) and Entra Connect (17) form the hybrid-identity chain.
+- **Build-out (1-7)** is the A+ Core 2 core. Each phase assumes the prior one finished cleanly.
+- **Planned (8-10, 15-16)** is the committed roadmap, sequenced for Security+ (SY0-701): hardening, least-privilege file services, patching, recovery, and resilience. Phases 15 and 16 keep their original numbers from the old stretch track so existing links stay valid.
+- **Stretch (13-14, 17)** is optional MSP depth. DHCP and RDP branch off a working domain independently. The second DC (16) and Entra Connect (17) form the hybrid-identity chain.
 - **AI Security Lab** is the next guide. It reuses this same homelab. Two bridges connect the tracks: finishing the AD build-out leads into the local-LLM work, and Entra Connect (17) feeds directly into securing a cloud AI service with these synced identities (AI Phase 4). See [Next Lab Series](next-lab-series.md).

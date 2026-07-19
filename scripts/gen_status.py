@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Generate lab-status.json from the phase markdown files.
 
-For each docs/build-out/phase-*.md and docs/stretch/phase-*.md it reads:
+For each docs/build-out/, docs/planned/, and docs/stretch/ phase-*.md it reads:
   - id     from the filename  (phase-07-... -> 7)
   - title  from the H1        ('# Phase 7: Join a client (WS01)' -> 'Join a client (WS01)')
   - status from the first '**Status:**' line
@@ -57,7 +57,7 @@ def parse_phase(md_path: Path, track: str):
 
 def main() -> None:
     phases = []
-    for track in ("build-out", "stretch"):
+    for track in ("build-out", "planned", "stretch"):
         for md in sorted((DOCS / track).glob("phase-*.md")):
             phase = parse_phase(md, track)
             if phase:

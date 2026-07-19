@@ -1,24 +1,22 @@
 # Phase 15: AD backup and restore
 
-**Status:** Stretch. Beyond A+ Core 2 scope; portfolio depth toward MSP / SysAdmin work.
+**Status:** Not started. Planned; promoted from stretch with Security+ as the target.
 
-## Goal
+**Goal:** Take a System State backup of `DC01`, enable the AD Recycle Bin, practice an undelete, and walk the DSRM authoritative-restore path.
 
-Take a System State backup of `DC01` with Windows Server Backup, then walk through two restore scenarios:
+**What this proves:** I can recover deleted AD objects the fast way (Recycle Bin) and the catastrophic-loss way (System State + DSRM), the difference between a ticket and an outage. Supports SY0-701: 3.4 (resilience and recovery).
+
+Two restore flavors this phase covers:
 
 1. **Non-authoritative restore**: a DC is rebuilt and re-replicates from another DC.
 2. **Authoritative restore**: an OU was deleted, and you bring it back as the source of truth.
 
 In a single-DC lab, non-authoritative is mostly theoretical (there is no second DC to replicate from). Phase 16 fixes that. This phase teaches the mechanics.
 
-## Why it matters
-
-Backups are the answer to every "we deleted an OU by accident" ticket. The AD Recycle Bin is the modern fast path. System State + DSRM is the only path for catastrophic loss.
-
 ## Prerequisites
 
-- Phase 12 complete (you have content worth backing up).
-- DSRM password from Phase 3 saved and known.
+- Phase 7 complete (you have content worth backing up).
+- DSRM password from Phase 1 saved and known.
 
 ## Steps
 
@@ -150,6 +148,10 @@ This is the workflow you would run if the Recycle Bin was not enabled or the obj
 ??? info "Why authoritative vs non-authoritative"
     - **Non-authoritative restore**: bring this DC back to a past state, then let replication overwrite anything that has changed since on other DCs. Useful when the DC itself failed but the rest of AD is fine.
     - **Authoritative restore**: bring a specific object (or subtree) back and **force every other DC to accept this version**. Useful when something was deleted everywhere and you want it back everywhere. `ntdsutil`'s `authoritative restore` bumps the version number high enough that replication propagates it outward instead of overwriting it.
+
+## Screenshot
+
+- Capture: the restored HR OU in ADUC next to the `Restore-ADObject` output. Save as `img/phase-15-restore.png`. Slot reserved, phase not started.
 
 ## Verify
 

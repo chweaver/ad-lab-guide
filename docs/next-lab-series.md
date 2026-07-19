@@ -2,7 +2,7 @@
 
 You built a domain, hardened it with Group Policy, made it resilient with a second DC, and extended it to the cloud with Entra Connect. The next series turns the same homelab into an **AI security lab**: stand up a local model, attack it, defend it, then secure cloud AI with the identities you just synced.
 
-It is one continuous path, not a fresh start. AD foundations (Phases 1-12), then hybrid identity (Phases 16-17), then AI security. The AI series reuses the same pfSense subnets and the `corp.lab` domain, and adds a dedicated GPU server for the heavier phases. Tooling stays free or near-free.
+It is one continuous path, not a fresh start. AD foundations (Phases 1-7), then hybrid identity (Phases 16-17), then AI security. The AI series reuses the same pfSense subnets and the `corp.lab` domain, and adds a dedicated GPU server for the heavier phases. Tooling stays free or near-free.
 
 ## The arc (six phases)
 

@@ -8,11 +8,11 @@ Sync the on-prem `corp.lab` users into a **Microsoft Entra ID** tenant using **M
 
 ## Why it matters
 
-Hybrid identity is the backbone of modern MSP work: on-prem AD stays the source of authority, and the cloud trusts it. This phase teaches the things that actually break real syncs: the non-routable-domain UPN problem, sync scoping by OU, and the difference between password hash sync, pass-through auth, and federation. It also sets up AI Security Lab Phase 4, where an Azure AI service is locked down with these same Entra identities.
+Hybrid identity is the backbone of modern MSP work: on-prem AD stays the source of authority, and the cloud trusts it. This phase teaches the things that break real syncs: the non-routable-domain UPN problem, sync scoping by OU, and the difference between password hash sync, pass-through auth, and federation. It also sets up AI Security Lab Phase 4, where an Azure AI service is locked down with these same Entra identities.
 
 ## Prerequisites
 
-- A healthy `corp.lab` domain (Phases 1 through 8). A second DC (Phase 16) is recommended, not required.
+- A healthy `corp.lab` domain (Phases 1 through 4). A second DC (Phase 16) is recommended, not required.
 - A **Microsoft Entra tenant**. Entra ID Free (included with a free Azure account) is enough for directory sync. [VERIFY] the current free path: a free Azure account creates a default tenant; the Microsoft 365 Developer Program sandbox now needs an eligible subscription, so do not assume the old free E5 sandbox is still open.
 - **Outbound internet from the sync server.** This is the catch: Entra Connect needs HTTPS to Microsoft, but the lab DC lives on the isolated host-only `VMnet1`. Run the sync on a member server that has a routed path out (the pfSense LAN), or add a second NATed NIC to a dedicated sync VM. Do not move the DC itself off its lab DNS rules.
 - A **cloud-only account** with the **Hybrid Identity Administrator** role for the install (for example `admin@<tenant>.onmicrosoft.com`). (Why cloud-only: if the admin you sign in with is itself a synced account, a sync problem can lock you out of fixing it.)

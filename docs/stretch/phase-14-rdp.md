@@ -12,7 +12,7 @@ RDP into a workstation is the most common remote-support workflow on a Windows n
 
 ## Prerequisites
 
-- Phase 7 complete. `WS01` is joined and reachable.
+- Phase 3 complete. `WS01` is joined and reachable.
 - A second machine on `VMnet1` to test from (could be the host itself, since it has an interface on `192.168.100.0/24`).
 
 ## Steps

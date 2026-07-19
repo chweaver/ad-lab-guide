@@ -117,9 +117,9 @@ The trailing `$` hides the share from network browsing. Anyone who knows the pat
 
 | Name | When taken | Purpose |
 |------|------------|---------|
-| `clean-install-tools-done` | After Phase 1 | Roll back to a fresh, patched Server 2022 with VMware Tools. |
-| `clean-dc-promoted` | After Phase 3 | Roll back to a working DC before users, GPOs, or shares exist. |
-| `clean-domain-joined` | After Phase 7 | WS01 joined, no GPOs applied yet. |
+| `clean-install-tools-done` | Phase 1, after Part 1 | Roll back to a fresh, patched Server 2022 with VMware Tools. |
+| `clean-dc-promoted` | Phase 1, after Part 3 | Roll back to a working DC before users, GPOs, or shares exist. |
+| `clean-domain-joined` | After Phase 3 | WS01 joined, no GPOs applied yet. |
 
 ## Common command quick-pick
 

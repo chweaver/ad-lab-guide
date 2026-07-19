@@ -1,21 +1,15 @@
-# Phase 12: Help-desk admin drills
+# Phase 7: Help-desk admin drills
 
 **Status:** Not started.
 
-## Goal
+**Goal:** Run the six day-one help-desk operations against the lab: password reset, account unlock, lockout policy, enable/disable/delete, OU moves, and machine-account repair. PowerShell and ADUC versions of each.
 
-Practice the day-one tasks an A+/help-desk technician actually does on AD: reset a password, unlock a locked-out account, enable/disable an account, configure account lockout policy, and move objects between OUs. PowerShell and ADUC versions of each.
-
-## Why it matters
-
-Phases 1 to 11 build the lab. Phase 12 is the lab paying you back. These five operations cover something like 80% of real-world AD ticket volume.
-
-A+ Core 2 angle: the exam phrasing is "user cannot log in, what do you do?", "the account is locked, how do you fix it?", "what is the difference between disable and delete?". These drills give you literal muscle memory for the answers.
+**What this proves:** The lab pays for itself: these six operations cover most real-world AD ticket volume, and I can do each from the console and the shell.
 
 ## Prerequisites
 
-- Phase 11 complete. WS01 is fully usable.
-- 12 lab users from Phase 5 in `OU=Departments`.
+- Phase 6 complete. WS01 is fully usable.
+- 12 lab users from Phase 2 in `OU=Departments`.
 
 ## Steps and drills
 
@@ -33,7 +27,7 @@ Set-ADUser -Identity tmarsh -ChangePasswordAtLogon $true   # force a real change
 
 ADUC: right-click the user > **Reset Password**. Check "User must change password at next logon".
 
-(Why `-Reset` and not `-OldPassword`/`-NewPassword`: a helpdesk reset does not require the old password. A user change does. Different cmdlet path, same outcome.)
+`-Reset` skips the old password: a helpdesk reset does not require it, a user change does.
 
 ### Drill 2: Unlock an account
 
@@ -53,7 +47,7 @@ Search-ADAccount -LockedOut | Select-Object SamAccountName, LastLogonDate
 
 ### Drill 3: Account lockout policy
 
-Scenario: set the domain default. "Lock the account after 5 bad attempts, keep it locked for 15 minutes, reset the bad-attempt counter after 15 minutes."
+Scenario: set the domain default. Lock after 5 bad attempts, keep locked 15 minutes, reset the counter after 15 minutes. (5 attempts is the industry common floor; 15 minutes deters a brute force without stranding a real user.)
 
 ```powershell
 # Default Domain Policy is what enforces this in a single-domain forest.
@@ -69,8 +63,6 @@ Verify:
 ```powershell
 Get-ADDefaultDomainPasswordPolicy
 ```
-
-(Why these numbers: 5 attempts is the industry common floor. 15 minutes is enough to deter a brute force, short enough that a real user does not call helpdesk in tears.)
 
 ### Drill 4: Enable / disable / delete an account
 
@@ -94,14 +86,14 @@ Remove-ADUser -Identity vcarr -Confirm:$false
 
 ADUC equivalents: right-click > **Disable Account** / **Enable Account** / **Delete**.
 
-Why disable before delete: a disabled account keeps its SID and group memberships. Re-enabling brings the user back exactly as before. A deleted account is gone; recreating with the same name produces a **new SID**, which means all NTFS ACLs and group memberships are lost.
+A disabled account keeps its SID and group memberships; re-enabling brings the user back exactly as before. A deleted account is gone; recreating with the same name produces a **new SID**, so all NTFS ACLs and group memberships are lost.
 
 ### Drill 5: Move an object between OUs
 
 Scenario: `mdunn` transferred from Sales to IT.
 
 ```powershell
-# Clear protection if it is set on the source OU (Phase 4 set this on all OUs)
+# Clear protection if it is set on the source OU (Phase 2 set this on all OUs)
 Set-ADUser -Identity mdunn -ProtectedFromAccidentalDeletion:$false
 
 Move-ADObject `
@@ -116,15 +108,15 @@ Add-ADGroupMember    -Identity IT-Staff    -Members mdunn
 Set-ADUser -Identity mdunn -ProtectedFromAccidentalDeletion:$true
 ```
 
-ADUC: drag the user into the new OU. ADUC handles the protection prompt for you. Group memberships are NOT updated automatically; remember to fix them separately.
+ADUC: drag the user into the new OU. ADUC handles the protection prompt. Group memberships are NOT updated automatically; fix them separately.
 
-(Why moves matter: a user's DN changes, which means OU-linked GPOs change, which means the user's wallpaper, drive maps, and folder redirection all may shift. After a move, log the user out and back in.)
+A move changes the user's DN, which changes which OU-linked GPOs apply: wallpaper, drive maps, and folder redirection can all shift. Log the user out and back in after a move.
 
 ### Drill 6: Reset a computer account ("trust relationship failed")
 
-Scenario: `WS01` boots and shows "the trust relationship between this workstation and the primary domain failed". This means the machine-account password is out of sync with AD.
+Scenario: `WS01` boots and shows "the trust relationship between this workstation and the primary domain failed". The machine-account password is out of sync with AD.
 
-From an elevated PowerShell on `WS01`, logged in with a local admin (or cached domain admin):
+From elevated PowerShell on `WS01`, logged in with a local admin (or cached domain admin):
 
 ```powershell
 Reset-ComputerMachinePassword -Server DC01 -Credential corp\Administrator
@@ -132,6 +124,10 @@ Reset-ComputerMachinePassword -Server DC01 -Credential corp\Administrator
 ```
 
 The old way (still works): unjoin from the domain, reboot, rejoin. The `Reset-ComputerMachinePassword` path is faster.
+
+## Screenshot
+
+- Capture: `Search-ADAccount -LockedOut` before and after an unlock, plus `Get-ADDefaultDomainPasswordPolicy` output. Save as `img/phase-07-drills.png`. Slot reserved, not captured yet.
 
 ## Verify
 

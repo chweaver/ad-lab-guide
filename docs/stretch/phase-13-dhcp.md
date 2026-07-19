@@ -12,7 +12,7 @@ In a real environment, AD plus DHCP plus DNS is the "name and address" core. A s
 
 ## Prerequisites
 
-- Phase 7 complete (you have a client to test against).
+- Phase 3 complete (you have a client to test against).
 - VMware's own DHCP on `VMnet1` is **disabled** (set up in Phase 1). Two DHCP servers on the same subnet is the standard way to break a lab.
 
 ## Steps

@@ -1,18 +1,16 @@
 # Phase 16: Second DC on Server 2025 and replication
 
-**Status:** Stretch. Beyond A+ Core 2 scope; portfolio depth toward MSP / SysAdmin work, and the gateway to hybrid identity (Phase 17).
+**Status:** Not started. Planned; promoted from stretch with Security+ as the target, and the gateway to hybrid identity (Phase 17).
 
-## Goal
+**Goal:** Build `DC02` on **Windows Server 2025**, promote it into `corp.lab`, confirm two-way replication, and move one FSMO role to it. End state: two DCs on different OS versions, both authoritative, replicating bidirectionally.
 
-Build a second domain controller, `DC02`, this time on **Windows Server 2025**, and promote it into the existing `corp.lab` domain. Confirm two-way replication, then move one FSMO role to it. End state: two DCs on different OS versions, both authoritative for the domain, replicating bidirectionally. The mixed-version pair is the realistic enterprise case (you almost never rebuild every DC at once), and a resilient two-DC domain is the right starting point for Phase 17, where this domain syncs to the cloud.
+**What this proves:** I can take a domain from single point of failure to resilient, and I understand the fact new admins miss most: DC OS version and functional level are independent. Supports SY0-701: 3.4 (high availability, resilience).
 
-## Why it matters
-
-Single-DC domains are a single point of failure. Every real environment runs at least two. Building DC02 on a newer OS than DC01 also teaches the single most misunderstood AD fact: a domain controller's OS version and the domain/forest functional level are independent. You can add a Server 2025 DC to a domain running at the Server 2016 functional level. Replication, FSMO roles, and the schema update that a newer DC triggers are the day-two concepts a sysadmin lives in.
+The mixed-version pair is the realistic enterprise case (you almost never rebuild every DC at once), and a resilient two-DC domain is the right starting point for Phase 17, where this domain syncs to the cloud.
 
 ## Prerequisites
 
-- A healthy `DC01` with the domain populated (Phases 1 through 8). Phases 13 to 15 are not required first.
+- A healthy `DC01` with the domain populated (Phases 1 through 4). Phases 13 to 15 are not required first.
 - About 4 GB of host RAM free for a second VM (8 GB if you can spare it; Server 2025 runs fine on 4).
 - A Windows Server 2025 ISO (Standard Evaluation, Desktop Experience).
 - Logged in as `CORP\Administrator`, which in a single-domain forest is already a member of Schema Admins and Enterprise Admins. (Why this matters: promoting the first Server 2025 DC extends the schema, and only those two groups can do that.)
@@ -146,6 +144,10 @@ netdom query fsmo
     - **Infrastructure Master**: tracks cross-domain object references. In a single-domain forest the rule is "do not put this on a Global Catalog," with one exception: if every DC is a GC (the common case), it does not matter. In the lab both DCs are GCs, so it does not matter.
     - **Schema Master / Domain Naming Master**: only matter during schema extension (Exchange install, a newer-OS DC, etc.). Park them on DC01.
 
+## Screenshot
+
+- Capture: `repadmin /replsummary` clean output plus `Get-ADDomainController` showing the 2022 + 2025 pair. Save as `img/phase-16-replication.png`. Slot reserved, phase not started.
+
 ## Verify
 
 ```powershell
@@ -188,4 +190,4 @@ After replication is confirmed, snapshot **both DCs together**. Name them `clean
 
 ## Next
 
-With two healthy DCs, the on-prem domain is resilient enough to extend to the cloud. **[Phase 17](phase-17-entra-connect.md)** installs Entra Connect and syncs `corp.lab` identities into Microsoft Entra ID, the first step of the hybrid-identity and AI-security track. See the [Next Lab Series](../next-lab-series.md) page for where this leads.
+With two healthy DCs, the on-prem domain is resilient enough to extend to the cloud. **[Phase 17](../stretch/phase-17-entra-connect.md)** installs Entra Connect and syncs `corp.lab` identities into Microsoft Entra ID, the first step of the hybrid-identity and AI-security track. See the [Next Lab Series](../next-lab-series.md) page for where this leads.
