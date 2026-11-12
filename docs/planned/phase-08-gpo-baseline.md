@@ -1,6 +1,6 @@
 # Phase 8: GPO security baseline
 
-**Status:** Not started. Planned; first on the list now that A+ is passed and Security+ (SY0-701) is the target.
+**Status:** Not started. Planned; first on the list after the build-out.
 
 **Goal:** Replace the lab-convenience defaults with a real security baseline in one GPO set: domain password policy, account lockout, and an audit policy that makes failed logons visible in Event Viewer.
 

@@ -1,6 +1,6 @@
 # Phase 16: Second DC on Server 2025 and replication
 
-**Status:** Not started. Planned; promoted from stretch with Security+ as the target, and the gateway to hybrid identity (Phase 17).
+**Status:** Not started. Planned; promoted from stretch, and the gateway to hybrid identity (Phase 17).
 
 **Goal:** Build `DC02` on **Windows Server 2025**, promote it into `corp.lab`, confirm two-way replication, and move one FSMO role to it. End state: two DCs on different OS versions, both authoritative, replicating bidirectionally.
 

@@ -1,6 +1,6 @@
 # Phase 6: Login scripts and drive maps
 
-**Status:** In progress. Remaining: the Verify pass on WS01 (login.log exists, `S:` maps for IT users only).
+**Status:** Done.
 
 **Goal:** Run a login script via GPO and map a drive via Group Policy Preferences with item-level targeting, so IT users get `S:` pointed at `\\DC01\IT$` and everyone in `Departments` gets a logged greeting.
 
