@@ -1,6 +1,6 @@
 # AD Lab Foundations
 
-A reproducible Active Directory home lab on VMware Workstation. Two jobs: a personal quick-reference for "what do I do next" and a portfolio piece. Built during CompTIA A+ 220-1202 (Core 2) prep; the planned phases now target Security+ (SY0-701).
+A reproducible Active Directory home lab on VMware Workstation. Two jobs: a personal quick-reference for "what do I do next" and a portfolio piece. Built during CompTIA A+ 220-1202 (Core 2) prep; the planned phases add security and resilience depth, mapped to Security+ (SY0-701) objectives.
 
 This is a **guide**, not a build log. Every phase is reproducible from a blank VM by following the steps exactly.
 
@@ -52,7 +52,7 @@ Both VMs live on the same subnet, so the domain join does not traverse any exter
 | 3 | Join client WS01 | Done |
 | 4 | Group Policy basics | Done |
 | 5 | File services | Done |
-| 6 | Login scripts and drive maps | **In progress** |
+| 6 | Login scripts and drive maps | Done |
 | 7 | Help-desk admin drills | Not started |
 | 8 | GPO security baseline | Planned |
 | 9 | Departmental file server | Planned |

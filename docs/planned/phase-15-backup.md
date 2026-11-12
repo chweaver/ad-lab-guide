@@ -1,6 +1,6 @@
 # Phase 15: AD backup and restore
 
-**Status:** Not started. Planned; promoted from stretch with Security+ as the target.
+**Status:** Not started. Planned; promoted from stretch.
 
 **Goal:** Take a System State backup of `DC01`, enable the AD Recycle Bin, practice an undelete, and walk the DSRM authoritative-restore path.
 
